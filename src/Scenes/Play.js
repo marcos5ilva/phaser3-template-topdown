@@ -4,7 +4,7 @@ import Entity from '../prefabs/Entity';
 import logoImg from '../assets/logo.png';
 
 //load player spritesheet image
-import sprPlayer from '../assets/img/playerGirl.png';
+import sprPlayer from '../assets/img/dude.png';
 
 export default class PlayScene extends Phaser.Scene {
   constructor(key) {
@@ -16,8 +16,8 @@ export default class PlayScene extends Phaser.Scene {
 
     //load player spritesheet and add frameWidth, and frameHeight
     this.load.spritesheet('spr-player', sprPlayer, {
-      frameWidth: 16,
-      frameHeight: 17,
+      frameWidth: 32,
+      frameHeight: 48,
     });
   }
 

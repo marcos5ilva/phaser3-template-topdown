@@ -1,6 +1,5 @@
 import phaser from 'phaser';
 import MenuScene from './Menu';
-import spHero from '../assets/img/playerGirl.png';
 
 export default class Preload extends Phaser.Scene {
   constructor() {
@@ -15,13 +14,6 @@ export default class Preload extends Phaser.Scene {
   preload() {
     //Create loading bar
     this.createLoadingBar();
-
-    //this.load.setPath('assets/img');
-
-    this.load.spritesheet('sp-hero', spHero, {
-      frameWidth: 16,
-      frameHeight: 17,
-    });
   }
 
   create() {
