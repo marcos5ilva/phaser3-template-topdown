@@ -1,5 +1,6 @@
 import phaser from 'phaser';
 import Entity from '../prefabs/Entity';
+import Player from '../prefabs/Player';
 
 import logoImg from '../assets/logo.png';
 
@@ -13,12 +14,11 @@ export default class PlayScene extends Phaser.Scene {
 
   preload() {
     //this.load.image('logo', logoImg);
-
     //load player spritesheet and add frameWidth, and frameHeight
-    this.load.spritesheet('spr-player', sprPlayer, {
+    /*this.load.spritesheet('spr-player', sprPlayer, {
       frameWidth: 32,
       frameHeight: 48,
-    });
+    });*/
   }
 
   create() {
@@ -31,7 +31,7 @@ export default class PlayScene extends Phaser.Scene {
 
   createPlayer() {
     //Create a player instance of the Entity prefab
-    this.player = new Entity(
+    this.player = new Player(
       this,
       this.game.CONFIG.centerX,
       this.game.CONFIG.centerY,
@@ -39,5 +39,8 @@ export default class PlayScene extends Phaser.Scene {
     );
 
     this.player.createSprite();
+    if (this.player.spr) {
+      this.player.startNewAnim('walk');
+    }
   }
 }

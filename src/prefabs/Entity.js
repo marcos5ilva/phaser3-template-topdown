@@ -48,4 +48,84 @@ export default class Entity {
     console.log('this.spr ', this.spr);
     this.spr.setOrigin(0.5);
   }
+
+  destroySprite() {
+    if (this.spr) {
+      this.spr.destroy();
+    }
+    this.spr = false;
+  }
+
+  updateSpriteDirection() {
+    switch (this.direction.current) {
+      case 'left':
+        this.spr.setAngle(90);
+        break;
+      case 'left':
+        this.spr.setAngle(90);
+        break;
+      case 'right':
+        this.spr.setAngle(-90);
+        break;
+      case 'up':
+        this.spr.setAngle(100);
+        break;
+      case 'down':
+        this.spr.setAngle(0);
+        break;
+    }
+  }
+
+  //Animations
+  startNewAnim(key) {
+    this.stopAnim();
+
+    switch (key) {
+      case 'idle':
+        this.startIdleAnim();
+        break;
+      case 'walk':
+        this.startWalkAnim();
+        break;
+      case 'attack':
+        this.startAttackAnim();
+        break;
+      case 'hurt':
+        this.startHurtAnim();
+        break;
+      case 'die':
+        this.startDieAnim();
+        break;
+
+      default:
+        console.log(this.key + ' invalid ANIM key ', key);
+        break;
+    }
+  }
+
+  startIdleAnim() {
+    this.spr.play(this.key + '-idle');
+  }
+
+  startWalkAnim() {
+    console.log('startWalkAnim()', this.spr);
+    this.spr.play(this.key + '-walk');
+  }
+
+  startAttackAnim() {
+    this.spr.play(this.key + '-attack');
+  }
+
+  startHurtAnim() {
+    this.spr.play(this.key + '-hurt');
+  }
+
+  startDieAnim() {
+    this.spr.play(this.key + '-die');
+  }
+
+  stopAnim() {
+    this.spr.anims.stop();
+    this.spr.setFrame(this.frames.idle);
+  }
 }
