@@ -45,6 +45,7 @@ export default class Menu extends Phaser.Scene {
     function handleKeyUp(e) {
       switch (e.code) {
         case 'Enter':
+          console.log('Enter key was pressed');
           this.startPlay();
           break;
       }

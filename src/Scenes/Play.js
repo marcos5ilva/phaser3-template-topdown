@@ -4,29 +4,38 @@ import Player from '../prefabs/Player';
 
 import logoImg from '../assets/logo.png';
 
-//load player spritesheet image
-import sprPlayer from '../assets/img/dude.png';
-
 export default class PlayScene extends Phaser.Scene {
   constructor(key) {
     super(key);
+
+    //Controls
+    this.is_holding = {
+      up: false,
+      down: false,
+      left: false,
+      right: false,
+      direction: false,
+    };
   }
 
   preload() {
     //this.load.image('logo', logoImg);
-    //load player spritesheet and add frameWidth, and frameHeight
-    /*this.load.spritesheet('spr-player', sprPlayer, {
-      frameWidth: 32,
-      frameHeight: 48,
-    });*/
   }
 
   create() {
     console.log('Play scene loaded');
     //const logo = this.add.image(400, 150, 'logo');
 
+    ///Create controls
+    this.createControls();
+
     //Create a player based on the Entity prefab
     this.createPlayer();
+  }
+
+  update() {
+    //pass input control to the player prefab
+    this.player.update(this.cursors);
   }
 
   createPlayer() {
@@ -42,5 +51,15 @@ export default class PlayScene extends Phaser.Scene {
     if (this.player.spr) {
       this.player.startNewAnim('walk');
     }
+  }
+
+  createControls() {
+    ///listen for keyboard  input
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.spaceKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE
+    );
+
+    //Add input callbacks
   }
 }

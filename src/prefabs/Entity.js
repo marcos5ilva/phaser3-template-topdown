@@ -44,7 +44,9 @@ export default class Entity {
     if (this.spr) {
       this.spr.destroy();
     }
-    this.spr = this.ctx.add.sprite(this.x, this.y, this.key);
+
+    this.spr = this.ctx.physics.add.sprite(this.x, this.y, this.key);
+
     console.log('this.spr ', this.spr);
     this.spr.setOrigin(0.5);
   }
