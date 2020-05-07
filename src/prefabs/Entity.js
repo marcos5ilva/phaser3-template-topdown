@@ -9,12 +9,12 @@ export default class Entity {
     this.key = key;
 
     this.frames = {
-      idle: 0,
+      idle: 4,
       hurt: 3,
     };
 
     //animation states
-    this.states = {
+    this.state = {
       idle: true,
       walk: false,
       hurt: false,
@@ -47,7 +47,6 @@ export default class Entity {
 
     this.spr = this.ctx.physics.add.sprite(this.x, this.y, this.key);
 
-    console.log('this.spr ', this.spr);
     this.spr.setOrigin(0.5);
   }
 
@@ -80,14 +79,25 @@ export default class Entity {
 
   //Animations
   startNewAnim(key) {
-    this.stopAnim();
+    // this.stopAnim();
 
     switch (key) {
       case 'idle':
         this.startIdleAnim();
+        console.log('switch start idle anim');
         break;
-      case 'walk':
-        this.startWalkAnim();
+      case 'walk-left':
+        this.startWalkLeftAnim();
+        console.log('switch walk left');
+        break;
+      case 'walk-right':
+        this.startWalkRightAnim();
+        break;
+      case 'walk-up':
+        this.startWalkUpAnim();
+        break;
+      case 'walk-down':
+        this.startWalkDownAnim();
         break;
       case 'attack':
         this.startAttackAnim();
@@ -106,28 +116,69 @@ export default class Entity {
   }
 
   startIdleAnim() {
-    this.spr.play(this.key + '-idle');
+    console.log('starting idle anim');
+    this.spr.play(this.key + '-idle', true);
   }
 
   startWalkAnim() {
     console.log('startWalkAnim()', this.spr);
-    this.spr.play(this.key + '-walk');
+    this.spr.play(this.key + '-walk-left', true);
+  }
+
+  startWalkLeftAnim() {
+    this.spr.play(this.key + '-walk-left', true);
+  }
+
+  startWalkRightAnim() {
+    this.spr.play(this.key + '-walk-right', true);
+  }
+
+  startWalkUpAnim() {
+    this.spr.play(this.key + '-walk-up', true);
+  }
+
+  startWalkDownAnim() {
+    this.spr.play(this.key + '-walk-down', true);
   }
 
   startAttackAnim() {
-    this.spr.play(this.key + '-attack');
+    this.spr.play(this.key + '-attack', true);
   }
 
   startHurtAnim() {
-    this.spr.play(this.key + '-hurt');
+    this.spr.play(this.key + '-hurt', true);
   }
 
   startDieAnim() {
-    this.spr.play(this.key + '-die');
+    this.spr.play(this.key + '-die', true);
   }
 
   stopAnim() {
     this.spr.anims.stop();
-    this.spr.setFrame(this.frames.idle);
+    // this.spr.setFrame(this.frames.idle, true);
+  }
+
+  //Animation control
+  animControl() {
+    console.log('animControl state.walk ', this.state.walk);
+    if (!this.state.walk) {
+      this.stopAnim();
+      /*switch (this.direction.current) {
+        case 'up':
+          this.startNewAnim('walk-up');
+          break;
+        case 'down':
+          this.startNewAnim('walk-down');
+          break;
+        case 'left':
+          this.startNewAnim('walk-left');
+          break;
+        case 'right':
+          this.startNewAnim('walk-right');
+          break;
+      }*/
+    } else {
+      this.startNewAnim(`walk+${this.state.direction}`);
+    }
   }
 }

@@ -49,7 +49,7 @@ export default class PlayScene extends Phaser.Scene {
 
     this.player.createSprite();
     if (this.player.spr) {
-      this.player.startNewAnim('walk');
+      //this.player.startNewAnim('walk');
     }
   }
 
