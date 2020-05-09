@@ -23,6 +23,12 @@ export default class Preload extends Phaser.Scene {
 
     //Create loading bar
     this.createLoadingBar();
+
+    //loading tilemap
+    //this.load.tilemapTiledJSON('tilemapkey', 'tilemap path')
+
+    //loading tilemap spritesheet
+    //this.load.spritesheet( 'spritesheetkey , 'path',)
   }
 
   create() {
